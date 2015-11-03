@@ -1,6 +1,8 @@
 <?php
 namespace PromisePay;
 
+use PromisePay\DataObjects\Item;
+use PromisePay\DataObjects\User;
 use PromisePay\DataObjects\BPayDetails;
 use PromisePay\DataObjects\Fee;
 use PromisePay\DataObjects\Errors;
@@ -10,13 +12,19 @@ use PromisePay\DataObjects\WireDetails;
 use PromisePay\Exception;
 use PromisePay\Log;
 
-use PromisePay\DataObjects\Item;
-use PromisePay\DataObjects\User;
-
-class ItemRepository extends BaseRepository
-{
-    public function getListOfItems($limit = 20, $offset = 0)
-    {
+/**
+ * Class ItemRepository
+ * @package PromisePay
+ */
+class ItemRepository extends BaseRepository {
+    /**
+     *  List all items for a marketplace.
+     *
+     * @param int $limit
+     * @param int $offset
+     * return array|null
+     */
+    public function getListOfItems($limit = 20, $offset = 0) {
         $this->paramsListCorrect($limit,$offset);
         $response = $this->RestClient('get', 'items?limit=' . $limit . '&offset=' . $offset, '', '');
         $jsonRaw = json_decode($response->raw_body, true);
@@ -36,7 +44,16 @@ class ItemRepository extends BaseRepository
         }
         return null;
     }
-
+    
+    /**
+     * List a single item for a marketplace. 
+     * Note: Please use getItemStatus() (/items/:id/status) if 
+     * polling of state changes are required.
+     * Expects ID parameter in format of "8d65c86c-14f4-4abf-a979-eba0a87b283a".
+     *
+     * @param string $id
+     * @return Item|null
+     */
     public function getItemById($id)
     {
         $this->checkIdNotNull($id);
@@ -53,7 +70,13 @@ class ItemRepository extends BaseRepository
             return null;
         }
     }
-
+    
+    /**
+     * Create an item for a marketplace.
+     *
+     * @param Item $item
+     * @return Errors|Item
+     */
     public function createItem(Item $item)
     {
         $payload = '';
@@ -89,7 +112,16 @@ class ItemRepository extends BaseRepository
             return $item;
         }
     }
-
+    
+    /**
+     * Delete an item for a marketplace. 
+     * Can only delete an item if it is in the pending state. 
+     * Deleting the item puts it into the cancelled state.
+     * Expects ID parameter in format of "8d65c86c-14f4-4abf-a979-eba0a87b283a".
+     *
+     * @param string $id
+     * @return bool
+     */
     public function deleteItem($id)
     {
         $this->checkIdNotNull($id);
@@ -102,14 +134,21 @@ class ItemRepository extends BaseRepository
             return true;
         }
     }
-
-    public function updateItem(Item $item, $user = null, $account = null, $releaseAmount = null)
-    {
+    
+    /**
+     * Update the attributes of an item.
+     *
+     * @param Item $item
+     * @param string $user
+     * @param string $account
+     * @param string $releaseAmount
+     * @return Errors|Item
+     */
+    public function updateItem(Item $item, $user = null, $account = null, $releaseAmount = null) {
         $payload = '';
         $preparePayload = array(
            'id'=>$item->getId(),
            'user'=>$user,
-          // 'operation'=>$operation,
            'amount'=>$item->getAmount(),
            'name'=>$item->getName(),
            'account'=>$account,
@@ -127,7 +166,6 @@ class ItemRepository extends BaseRepository
         }
 
         $response = $this->RestClient('patch', 'items/'.$item->getId().'?'.$payload);
-//        return $response;
         $jsonData = json_decode($response->raw_body, true);
         if(array_key_exists("errors", $jsonData))
         {
@@ -141,7 +179,15 @@ class ItemRepository extends BaseRepository
             return $editedItem;
         }
     }
-
+    
+    /**
+     * List the transaction ID's of a single item for a marketplace. 
+     * Note that the transactions relate specifically to the item.
+     * Expects ID parameter in format of "8d65c86c-14f4-4abf-a979-eba0a87b283a".
+     * 
+     * @param string $id
+     * @return array
+     */
     public function getListOfTransactionsForItem($id)
     {
         $this->checkIdNotNull($id);
@@ -159,7 +205,14 @@ class ItemRepository extends BaseRepository
         }
         return array();
     }
-
+    
+    /**
+     * Show the status of a single item for a marketplace
+     * Expects ID parameter in format of "8d65c86c-14f4-4abf-a979-eba0a87b283a".
+     *
+     * @param string $id
+     * @return ItemStatus|null
+     */
     public function getItemStatus($id)
     {
         $this->checkIdNotNull($id);
@@ -173,7 +226,15 @@ class ItemRepository extends BaseRepository
         }
         return null;
     }
-
+    
+    /**
+     * The fees call allows a marketplace the 
+     * ability to view fees assigned to an item.
+     * Expects ID parameter in format of "8d65c86c-14f4-4abf-a979-eba0a87b283a".
+     *
+     * @param string $id
+     * @return array
+     */
     public function getListFeesForItems($id)
     {
         $this->checkIdNotNull($id);
@@ -191,7 +252,14 @@ class ItemRepository extends BaseRepository
         }
         return array();
     }
-
+    
+    /**
+     * Show the buyers' details for a single item for a marketplace.
+     * Expects ID parameter in format of "8d65c86c-14f4-4abf-a979-eba0a87b283a".
+     *
+     * @param string $id
+     * @return User|null
+     */
     public function getBuyerOfItem($id)
     {
         $this->checkIdNotNull($id);
@@ -205,7 +273,14 @@ class ItemRepository extends BaseRepository
         }
         return null;
     }
-
+    
+    /**
+     * Show the sellers' details for a single item for a marketplace.
+     * Expects ID parameter in format of "8d65c86c-14f4-4abf-a979-eba0a87b283a".
+     *
+     * @param string $id
+     * @return User|null
+     */
     public function getSellerForItem($id)
     {
         $this->checkIdNotNull($id);
@@ -219,7 +294,14 @@ class ItemRepository extends BaseRepository
         }
         return null;
     }
-
+    
+    /**
+     * Show the wire details for payment.
+     * Expects ID parameter in format of "3cbdc0fd72d157cf2815e819aee23827a9f35001".
+     *
+     * @param string $id
+     * @return WireDetails|null
+     */
     public function getWireDetailsForItem($id)
     {
         $this->checkIdNotNull($id);
@@ -233,7 +315,14 @@ class ItemRepository extends BaseRepository
         }
         return null;
     }
-
+    
+    /**
+     * Show the wire details for payment.
+     * Expects ID parameter in format of "3cbdc0fd72d157cf2815e819aee23827a9f35001".
+     *
+     * @param string $id
+     * @return BPayDetails|null
+     */
     public function getBPayDetailsForItem($id)
     {
         $this->checkIdNotNull($id);
@@ -247,7 +336,14 @@ class ItemRepository extends BaseRepository
         }
         return null;
     }
-
+    
+    /**
+     * Make payment.
+     *
+     * @param string $itemId
+     * @param string $accountId
+     * @return  Item|null
+     */
     public function makePayment($itemId, $accountId)
     {
         $this->checkIdNotNull($itemId);
@@ -275,7 +371,13 @@ class ItemRepository extends BaseRepository
         }
         return null;
     }
-
+    
+    /**
+     * Request payment.
+     *
+     * @param string itemId
+     * @return Item|null
+     */
     public function requestPayment($itemId)
     {
         $this->checkIdNotNull($itemId);
@@ -290,7 +392,14 @@ class ItemRepository extends BaseRepository
         }
         return null;
     }
-
+    
+    /**
+     * Release payment.
+     *
+     * @param string $itemId
+     * @param string $releaseAmount
+     * @return Item|null
+     */
     public function releasePayment($itemId, $releaseAmount)
     {
         $this->checkIdNotNull($itemId);
@@ -319,7 +428,14 @@ class ItemRepository extends BaseRepository
         }
         return null;
     }
-
+    
+    /**
+     * Request release.
+     *
+     * @param string $itemId
+     * @param string $releaseAmount
+     * @return Item|null
+     */
     public function requestRelease($itemId, $releaseAmount)
     {
         $this->checkIdNotNull($itemId);
@@ -348,7 +464,13 @@ class ItemRepository extends BaseRepository
         }
         return null;
     }
-
+    
+    /**
+     * Cancel item.
+     *
+     * @param string $itemId
+     * @return Item|null
+     */
     public function cancelItem($itemId)
     {
         $this->checkIdNotNull($itemId);
@@ -362,7 +484,13 @@ class ItemRepository extends BaseRepository
         }
         return null;
     }
-
+    
+    /**
+     * Acknowledge wire transfer.
+     *
+     * @param string $itemId
+     * @return Item|null
+     */
     public function acknowledgeWire($itemId)
     {
         $this->checkIdNotNull($itemId);
@@ -377,7 +505,13 @@ class ItemRepository extends BaseRepository
         }
         return null;
     }
-
+    
+    /**
+     * Acknowledge PayPal transfer.
+     *
+     * @param string $itemId
+     * @return Item|null
+     */
     public function acknowledgePayPal($itemId)
     {
         $this->checkIdNotNull($itemId);
@@ -392,7 +526,13 @@ class ItemRepository extends BaseRepository
         }
         return null;
     }
-
+    
+    /**
+     * Revert wire transfer.
+     *
+     * @param string $itemId
+     * @return Item|null
+     */
     public function revertWire($itemId)
     {
         $response = $this->RestClient('patch', 'items/' . $itemId . '/revert_wire');
@@ -405,8 +545,16 @@ class ItemRepository extends BaseRepository
         }
         return null;
     }
-
-    public function requestRefund( $itemId,  $refundAmount,  $refundMessage)
+    
+    /**
+     * Request refund.
+     *
+     * @param string $itemId
+     * @param string $refundAmount
+     * @param string $refundMesage
+     * @return Item|null
+     */
+    public function requestRefund($itemId, $refundAmount, $refundMessage)
     {
         $this->checkIdNotNull($itemId);
         $this->checkIdNotNull($refundAmount);
@@ -436,8 +584,16 @@ class ItemRepository extends BaseRepository
         }
         return null;
     }
-
-    public function refund( $itemId,  $refundAmount,  $refundMessage)
+    
+    /**
+     * Request refund.
+     *
+     * @param string $itemId
+     * @param string $refundAmount
+     * @param string $refundMesage
+     * @return Item|null
+     */
+    public function refund($itemId, $refundAmount, $refundMessage)
     {
         $this->checkIdNotNull($itemId);
         $this->checkIdNotNull($refundAmount);

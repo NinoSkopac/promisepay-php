@@ -13,10 +13,13 @@ use PromisePay\Log;
  */
 class BankAccountRepository extends BaseRepository {
     /**
-     * 
+     * Lists a bank account for a user on a marketplace.
+     * Expects ID parameter in format of "8d65c86c-14f4-4abf-a979-eba0a87b283a".
+     *
+     * @param string $id
+     * @return BankAccount  
      */
-    public function getBankAccountById($id)
-    {
+    public function getBankAccountById($id) {
         $this->checkIdNotNull($id);
         $response = $this->RestClient('get', 'bank_accounts/'.$id);
         $jsonData = json_decode($response->raw_body, true);
@@ -24,9 +27,14 @@ class BankAccountRepository extends BaseRepository {
         $bankAccounts = new BankAccount($jsonData);
         return $bankAccounts;
     }
-
-    public function createBankAccount(BankAccount $bankAccount)
-    {
+    
+    /**
+     * Create a bank account for a user on a marketplace.
+     *
+     * @param BankAccount
+     * @return BankAccount
+     */
+    public function createBankAccount(BankAccount $bankAccount) {
         $payload = '';
         $preparePayload = array(
             "user_id" =>$bankAccount->getUserId(),
@@ -48,11 +56,17 @@ class BankAccountRepository extends BaseRepository {
         $response = $this->RestClient('post', 'bank_accounts/', $payload);
         $jsonData = json_decode($response->raw_body, true);
         return new BankAccount($jsonData['bank_accounts']);
-
     }
-
-    public function deleteBankAccount($id)
-    {
+    
+    /**
+     * Deletes a bank account for a user on a marketplace. 
+     * Sets the account to in-active.
+     * Expects ID parameter in format of "8d65c86c-14f4-4abf-a979-eba0a87b283a".
+     *
+     * @param string $id
+     * @return bool
+     */
+    public function deleteBankAccount($id) {
         $this->checkIdNotNull($id);
         $response = $this->RestClient('delete', 'bank_accounts/'.$id);
         $jsonRaw = json_decode($response->raw_body, true);
@@ -64,9 +78,15 @@ class BankAccountRepository extends BaseRepository {
             return true;
         }
     }
-
-    public function getUserForBankAccount($id)
-    {
+    
+    /**
+     * Shows the user the bank account belongs to.
+     * Expects ID parameter in format of "8d65c86c-14f4-4abf-a979-eba0a87b283a".
+     *
+     * @param string $id
+     * @return User|null
+     */
+    public function getUserForBankAccount($id) {
         $this->checkIdNotNull($id);
         $response = $this->RestClient('get','bank_accounts/'.$id.'/users');
         $jsonRaw = json_decode($response->raw_body, true);
