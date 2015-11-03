@@ -6,10 +6,24 @@ use PromisePay\DataObjects\Errors;
 use PromisePay\Exception;
 use PromisePay\Log;
 
-class FeeRepository extends BaseRepository
-{
-    public function getListOfFees($limit = 20, $offset = 0)
-    {
+/**
+ * Class FeeRepository
+ *
+ * @package PromisePay
+ */
+class FeeRepository extends BaseRepository {
+    /**
+     * This call allows a marketplace to view 
+     * all fees that can be applied to an item.
+     * Up to two parameters can be supplied to this function.
+     * Limit declares the amount of up to how many results can be returned.
+     * Offset declares from which point the results should be retrieved.
+     *
+     * @param int $limit
+     * @param int $offset
+     * @return array
+     */
+    public function getListOfFees($limit = 20, $offset = 0) {
         $this->paramsListCorrect($limit,$offset);
         $response = $this->RestClient('get', 'fees?limit=' . $limit . '&offset=' . $offset, '', '');
         $allFees = array();
@@ -21,18 +35,32 @@ class FeeRepository extends BaseRepository
         }
         return $allFees;
     }
-
-    public function getFeeById($id)
-    {
+    
+    /**
+     * This call allows a marketplace view all fees that can be applied to an item.
+     * Expects ID parameter (in form "ec9bf096-c505-4bef-87f6-18822b9dbf2c").
+     * This method is similar to getListOfFees(), except that it returns 
+     * only one Fee object.
+     *
+     * @param string $id
+     * @return Fee
+     */
+    public function getFeeById($id) {
         $this->checkIdNotNull($id);
         $response = $this->RestClient('get', 'fees/' . $id);
         $jsonData = json_decode($response->raw_body, true)['fees'];
         $fee = new Fee($jsonData);
         return $fee;
     }
-
-    public function createFee(Fee $fee)
-    {
+    
+    /**
+     * Create a new fee that can be applied to an item.
+     * Expects Fee object.
+     *
+     * @param Fee $fee
+     * @return Fee|Errors
+     */
+    public function createFee(Fee $fee) {
         $this->ValidateFee($fee);
         $payload = '';
         $preparePayload = array(
@@ -64,25 +92,23 @@ class FeeRepository extends BaseRepository
             return $fee;
         }
     }
-
-    public function ValidateFee(Fee $fee)
-    {
+    
+    /**
+     * Validates Fee.
+     * This is an internal method - it doesn't make requests towards API.
+     *
+     * @param Fee $fee
+     * @throws \PromisePay\Exception\Argument
+     * @throws \PromisePay\Exception\Validation
+     */
+    public function ValidateFee(Fee $fee) {
         if ($fee == null)
         {
             throw new Exception\Argument ('fee is empty');
         }
-        if (!in_array($fee->getTo(), $this->possibleTos()))
+        if (!in_array($fee->getTo(), array("buyer", "seller", "cc", "int_wire", "paypal_payout")))
         {
             throw new Exception\Validation ("To should have value of \"buyer\", \"seller\", \"cc\", \"int_wire\", \"paypal_payout\"");
         }
-
-    }
-
-    private function possibleTos()
-    {
-        $possibilities  = array(
-            "buyer", "seller", "cc", "int_wire", "paypal_payout",
-        );
-        return $possibilities;
     }
 }

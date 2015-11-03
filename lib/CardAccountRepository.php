@@ -7,15 +7,20 @@ use PromisePay\DataObjects\User;
 use PromisePay\Exception;
 use PromisePay\Log;
 
-class CardAccountRepository extends BaseRepository
-{
+/**
+ * Class CardAccountRepository
+ *
+ * @package PromisePay
+ */
+class CardAccountRepository extends BaseRepository {
     /**
-     * getCardAccountById
+     * List a card account for a user on a marketplace.
+     * Expects ID parameter (in form "ec9bf096-c505-4bef-87f6-18822b9dbf2c").
      *
-     * @return object|null
+     * @param string $id
+     * @return CardAccount|null
      */
-    public function getCardAccountById($id)
-    {
+    public function getCardAccountById($id) {
         $this->checkIdNotNull($id);
         $response = $this->RestClient('get', 'card_accounts/'.$id);
         $jsonData = json_decode($response->raw_body, true);
@@ -27,9 +32,15 @@ class CardAccountRepository extends BaseRepository
             return null;
         }
     }
-
-    public function createCardAccount(CardAccount $card)
-    {
+    
+    /**
+     * Create a card account for a user on a marketplace.
+     * Expects CardAccount object.
+     * 
+     * @param CardAccount $card
+     * @return CardAccount
+     */
+    public function createCardAccount(CardAccount $card) {
         $payload = '';
         $preparePayload = array(
                 "user_id" =>$card->getUserId(),
@@ -50,9 +61,16 @@ class CardAccountRepository extends BaseRepository
         $jsonData = json_decode($response->raw_body, true);
         return new CardAccount($jsonData['card_accounts']);
     }
-
-    public function deleteCardAccount($id)
-    {
+    
+    /**
+     * Deletes a card account for a user on a marketplace. 
+     * Sets the account to in-active.
+     * Expects ID parameter (in form "ec9bf096-c505-4bef-87f6-18822b9dbf2c").
+     *
+     * @param string $id
+     * @return bool
+     */
+    public function deleteCardAccount($id) {
         $this->checkIdNotNull($id);
         $response = $this->RestClient('delete', 'card_accounts/'.$id);
         $jsonRaw = json_decode($response->raw_body, true);
@@ -64,9 +82,15 @@ class CardAccountRepository extends BaseRepository
             return true;
         }
     }
-
-    public function getUserForCardAccount($id)
-    {
+    
+    /**
+     * Lists bank accounts for a user on a marketplace.
+     * Expects ID parameter (in form "ec9bf096-c505-4bef-87f6-18822b9dbf2c").
+     *
+     * @param string $id
+     * @return User|null
+     */
+    public function getUserForCardAccount($id) {
         $this->checkIdNotNull($id);
         $response = $this->RestClient('get','users/'.$id.'/bank_accounts');
         $jsonRaw = json_decode($response->raw_body, true);

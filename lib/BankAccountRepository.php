@@ -7,8 +7,14 @@ use PromisePay\DataObjects\User;
 use PromisePay\Exception;
 use PromisePay\Log;
 
-class BankAccountRepository extends BaseRepository
-{
+/*+
+ * Class BankAccountRepository
+ * @package PromisePay
+ */
+class BankAccountRepository extends BaseRepository {
+    /**
+     * 
+     */
     public function getBankAccountById($id)
     {
         $this->checkIdNotNull($id);
