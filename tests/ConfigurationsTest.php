@@ -62,8 +62,12 @@ class ConfigurationsTest extends \PHPUnit_Framework_TestCase {
         return $configurations;
     }
 
+    /** @group debug */
     public function testDelete($id = null) {
         $id = $id !== null ? $id : self::$configurationId;
+
+        // @DEBUG
+        dumpTestData(__METHOD__, ['id' => $id]);
 
         PromisePay::Configurations()->delete($id);
 
@@ -83,6 +87,9 @@ class ConfigurationsTest extends \PHPUnit_Framework_TestCase {
 
         foreach ($configurations as $configuration) {
             if ($configuration['name'] == 'partial_refunds') {
+                // @DEBUG
+                dumpTestData(__METHOD__, ['id' => $configuration['id']]);
+
                 $this->testDelete($configuration['id']);
             }
         }
