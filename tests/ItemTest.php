@@ -443,7 +443,8 @@ class ItemTest extends \PHPUnit_Framework_TestCase {
         $this->assertNotNull($requestRelease);
         $this->assertEquals($requestRelease['state'], 'work_completed');
     }
-    
+
+    /** @group debug */
     public function testRequestPartialRelease() {
         $this->itemData['payment_type'] = 3;
         
@@ -460,6 +461,12 @@ class ItemTest extends \PHPUnit_Framework_TestCase {
         
         $this->assertNotNull($requestPartialRelease);
         $this->assertEquals($requestPartialRelease['state'], 'partial_completed');
+
+        // @DEBUG
+        dumpTestData(__METHOD__, [
+            'expected' => $halfThePrice - $this->feeData['amount'],
+            'actual' => $requestPartialRelease['pending_release_amount']
+        ]);
         
         $this->assertEquals(
             $requestPartialRelease['pending_release_amount'],
@@ -475,6 +482,7 @@ class ItemTest extends \PHPUnit_Framework_TestCase {
      * @group dev
      * @group release-payment
      * @group failing
+     * @group debug
      */
     public function testReleasePayment() {
         extract($this->makePayment());
@@ -485,12 +493,20 @@ class ItemTest extends \PHPUnit_Framework_TestCase {
         
         $this->assertNotNull($releasePayment);
         $this->assertEquals($releasePayment['state'], 'completed');
+
+        // @DEBUGw
+        dumpTestData(__METHOD__, [
+            'expected' => $this->itemData['amount'] - $this->feeData['amount'],
+            'actual' => $releasePayment['pending_release_amount']
+        ]);
+
         $this->assertEquals(
             $releasePayment['pending_release_amount'],
             $this->itemData['amount'] - $this->feeData['amount']
         );
     }
-    
+
+    /** @group debug */
     public function testReleasePartialAmount() {
         $this->itemData['payment_type'] = 3;
         
@@ -512,15 +528,25 @@ class ItemTest extends \PHPUnit_Framework_TestCase {
             $releasePartialPayment['pending_release_amount'],
             $halfThePrice - $this->feeData['amount']
         );
+
+        // @DEBUGw
+        dumpTestData(__METHOD__, [
+            'expected' => (int) $this->itemData['amount'] - (int) $halfThePrice,
+            'actual' => $releasePartialPayment['total_outstanding']
+        ]);
         
         $this->assertEquals(
             $releasePartialPayment['total_outstanding'],
             (int) $this->itemData['amount'] - (int) $halfThePrice
         );
     }
-    
+
+    /** @group debug */
     public function testAcknowledgeWireTransfer() {
         $item = $this->createItem();
+
+        // @DEBUG
+        dumpTestData(__METHOD__, ['item id' => $item['id']]);
         
         $acknowledgeWireTransfer = PromisePay::Item()->acknowledgeWire(
             $item['id']
@@ -531,9 +557,13 @@ class ItemTest extends \PHPUnit_Framework_TestCase {
         
         return $item;
     }
-    
+
+    /** @group debug */
     public function testRevertWireTransfer() {
         $item = $this->testAcknowledgeWireTransfer();
+
+        // @DEBUG
+        dumpTestData(__METHOD__, ['item id' => $item['id']]);
         
         $revertWireTransfer = PromisePay::Item()->revertWire(
             $item['id']
