@@ -33,7 +33,13 @@
 
     "autoload": {
         "psr-4": {
-            "PromisePay\\":"/lib"
+            "PromisePay\\": "/lib"
+        }
+    },
+
+    "autoload-dev": {
+        "psr-4": {
+            "PromisePay\\Tests\\": "tests/"
         }
     }
 }
