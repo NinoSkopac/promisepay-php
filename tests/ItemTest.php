@@ -463,7 +463,7 @@ class ItemTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($requestPartialRelease['state'], 'partial_completed');
 
         // @DEBUG
-        dumpTestData(__METHOD__, [
+        Helpers\DebugFailing::createForFailing(__METHOD__, [
             'expected' => $halfThePrice - $this->feeData['amount'],
             'actual' => $requestPartialRelease['pending_release_amount']
         ]);
@@ -494,8 +494,8 @@ class ItemTest extends \PHPUnit_Framework_TestCase {
         $this->assertNotNull($releasePayment);
         $this->assertEquals($releasePayment['state'], 'completed');
 
-        // @DEBUGw
-        dumpTestData(__METHOD__, [
+        // @DEBUG
+        Helpers\DebugFailing::createForFailing(__METHOD__, [
             'expected' => $this->itemData['amount'] - $this->feeData['amount'],
             'actual' => $releasePayment['pending_release_amount']
         ]);
@@ -529,8 +529,8 @@ class ItemTest extends \PHPUnit_Framework_TestCase {
             $halfThePrice - $this->feeData['amount']
         );
 
-        // @DEBUGw
-        dumpTestData(__METHOD__, [
+        // @DEBUG
+        Helpers\DebugFailing::createForFailing(__METHOD__, [
             'expected' => (int) $this->itemData['amount'] - (int) $halfThePrice,
             'actual' => $releasePartialPayment['total_outstanding']
         ]);
@@ -546,7 +546,9 @@ class ItemTest extends \PHPUnit_Framework_TestCase {
         $item = $this->createItem();
 
         // @DEBUG
-        dumpTestData(__METHOD__, ['item id' => $item['id']]);
+        Helpers\DebugFailing::createForFailing(__METHOD__, [
+            'item id' => $item['id']
+        ]);
         
         $acknowledgeWireTransfer = PromisePay::Item()->acknowledgeWire(
             $item['id']
@@ -563,7 +565,9 @@ class ItemTest extends \PHPUnit_Framework_TestCase {
         $item = $this->testAcknowledgeWireTransfer();
 
         // @DEBUG
-        dumpTestData(__METHOD__, ['item id' => $item['id']]);
+        Helpers\DebugFailing::createForFailing(__METHOD__, [
+            'item id' => $item['id']
+        ]);
         
         $revertWireTransfer = PromisePay::Item()->revertWire(
             $item['id']

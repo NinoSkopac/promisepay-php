@@ -26,13 +26,17 @@ class WrappersTest extends \PHPUnit_Framework_TestCase {
             );
         };
     }
+
+    public static function tearDownAfterClass() {
+        // @DEBUG
+        fwrite(STDOUT, (string) new Helpers\DebugFailing());
+    }
     
     /**
      * @group wrapper-sync-fees
      */
     public function testGetAllResultsForFeesSynchronous() {
         $feesList = PromisePay::getAllResults($this->feesListFn);
-        
         $this->assertFeeData($feesList);
     }
     

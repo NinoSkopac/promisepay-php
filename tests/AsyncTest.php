@@ -91,6 +91,8 @@ class AsyncTest extends \PHPUnit_Framework_TestCase {
                 PromisePay::Fee()->get($randomId);
             }
         )->done($response);
+
+        // @TODO assert
     }
     
     private function readmeExamples() {

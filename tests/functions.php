@@ -1,11 +1,18 @@
 <?php
 namespace PromisePay\Tests;
 
-/**
- * @param string $testMethod
- * @param array $data
- */
-function dumpTestData($testMethod, $data) {
-    $output = sprintf("\n\nDumping data for %s: %s\n\n", $testMethod, print_r($data, true));
-    fwrite(STDOUT, $output);
+function GUID() {
+    return strtolower(
+        sprintf(
+            '%04X%04X-%04X-%04X-%04X-%04X%04X%04X',
+            mt_rand(0, 65535),
+            mt_rand(0, 65535),
+            mt_rand(0, 65535),
+            mt_rand(16384, 20479),
+            mt_rand(32768, 49151),
+            mt_rand(0, 65535),
+            mt_rand(0, 65535),
+            mt_rand(0, 65535)
+        )
+    );
 }
