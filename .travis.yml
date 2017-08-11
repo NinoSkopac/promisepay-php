@@ -12,4 +12,6 @@ matrix:
   allow_failures:
     - php: hhvm
     - php: nightly
-script: "phpunit tests"
+script:
+  - composer install
+  - phpunit tests
