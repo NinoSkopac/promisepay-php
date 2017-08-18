@@ -542,6 +542,7 @@ class ItemTest extends \PHPUnit_Framework_TestCase {
     }
 
     /** @group debug */
+    /** @group test-ack-wire-transfer */
     public function testAcknowledgeWireTransfer() {
         $item = $this->createItem();
 
