@@ -38,5 +38,17 @@ class Disbursement {
         
         return PromisePay::getDecodedResponse('paypal_accounts');
     }
+
+    public function getUsers($id) {
+        PromisePay::RestClient('get', 'disbursements/' . $id . '/users');
+
+        return PromisePay::getDecodedResponse('users');
+    }
+
+    public function getItems($id) {
+        PromisePay::RestClient('get', 'disbursements/' . $id . '/items');
+
+        return PromisePay::getDecodedResponse('items');
+    }
     
 }
