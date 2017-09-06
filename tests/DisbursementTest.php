@@ -18,7 +18,14 @@ class DisbursementTest extends \PHPUnit_Framework_TestCase {
      * @depends testGet
      */
     public function testGetUsers() {
-        $users = PromisePay::Disbursement()->getUsers($this->getDisbursementId());
+        $user = PromisePay::Disbursement()->getUsers($this->getDisbursementId());
+
+        // although the endpoint is 'users' (plural), this endpoint actually returns
+        // one user in the root of JSON response
+        $this->assertArrayHasKey('full_name', $user);
+        $this->assertArrayHasKey('first_name', $user);
+        $this->assertArrayHasKey('last_name', $user);
+        $this->assertArrayHasKey('email', $user);
     }
 
     /**
