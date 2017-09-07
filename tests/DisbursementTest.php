@@ -38,5 +38,10 @@ class DisbursementTest extends \PHPUnit_Framework_TestCase {
     protected function getDisbursementId() {
         return self::$disbursements[0]['id'];
     }
+
+    private function readmeExamples() {
+        $disbursement = PromisePay::Disbursement()->get();
+        $user = PromisePay::Disbursement()->getUsers('DISBURSEMENT_ID');
+    }
     
 }
