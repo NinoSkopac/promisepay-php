@@ -3,6 +3,7 @@
     "description": "PHP SDK for the PromisePay API",
     "keywords": [
         "promisepay",
+        "assembly payments",
         "marketplace",
         "api",
         "payments",
