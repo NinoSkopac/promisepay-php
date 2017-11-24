@@ -10,7 +10,7 @@ namespace PromisePay;
 use GuzzleHttp\Client as GuzzleClient;
 use PromisePay\Credentials\ConfigurationInterface;
 
-class PromisePayClient implements PromisePayInterface
+abstract class PromisePayClient implements PromisePayInterface
 {
     /**
      * @var ConfigurationInterface

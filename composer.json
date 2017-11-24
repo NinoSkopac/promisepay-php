@@ -1,5 +1,6 @@
 {
     "name": "promisepay/promisepay-php",
+    "homepage": "https://assemblypayments.com/",
     "description": "PHP SDK for the PromisePay API",
     "keywords": [
         "promisepay",
@@ -10,20 +11,25 @@
         "escrow",
         "marketplace payments"
     ],
-    "homepage": "https://promisepay.com/",
+    "support": {
+        "issues": "https://github.com/PromisePay/promisepay-php/issues"
+    },
     "require": {
         "php": ">=7.1",
         "ext-json": "*",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "~6.3"
     },
-
     "require-dev": {
         "phpunit/phpunit": "~6.4"
     },
-
     "autoload": {
         "psr-4": {
-            "PromisePay\\":"/src"
+            "PromisePay\\": "/src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PromisePay\\Test\\": "tests/"
         }
     }
 }
