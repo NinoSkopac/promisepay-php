@@ -7,7 +7,7 @@
  */
 declare(strict_type=1);
 namespace PromisePay;
-use PromisePay\Credentials\ConfigurationInterface;
+use PromisePay\Configuration\ConfigurationInterface;
 
 interface PromisePayInterface
 {

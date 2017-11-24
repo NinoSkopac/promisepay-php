@@ -7,7 +7,7 @@
  */
 declare(strict_type=1);
 namespace PromisePay\Addresses;
-use PromisePay\Credentials\ConfigurationInterface;
+use PromisePay\Configuration\ConfigurationInterface;
 use PromisePay\PromisePayClient;
 
 class AddressesClient extends PromisePayClient
@@ -17,14 +17,9 @@ class AddressesClient extends PromisePayClient
         parent::__construct($configuration);
     }
 
-    public function get($id) {
-        // @TODO
-        // figure out how to supply endpoints
-        // figure out what kind of response to return (probably an object with \ArrayAccess
+    public function get(string $id) {
+        $response = $this->guzzle()->get('addresses/' . $id);
 
-
-//        PromisePay::RestClient('get', 'addresses/' . $id);
-//
-//        return PromisePay::getDecodedResponse('addresses');
+        // @TODO return PromisePayResult
     }
 }

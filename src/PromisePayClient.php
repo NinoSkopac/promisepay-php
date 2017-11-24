@@ -8,7 +8,7 @@
 declare(strict_type=1);
 namespace PromisePay;
 use GuzzleHttp\Client as GuzzleClient;
-use PromisePay\Credentials\ConfigurationInterface;
+use PromisePay\Configuration\ConfigurationInterface;
 
 abstract class PromisePayClient implements PromisePayInterface
 {
@@ -21,20 +21,31 @@ abstract class PromisePayClient implements PromisePayInterface
      */
     private $guzzle;
 
+    private $guzzleOptions = [
+        'base_uri' => null,
+        'allow_redirects' => false,
+        'auth' => null,
+        'connect_timeout' => 10,
+        'timeout' => 10
+    ];
+
     /**
      * PromisePayClient constructor.
      * @param ConfigurationInterface $configuration
+     * @param array $guzzleOptions
      */
-    public function __construct(ConfigurationInterface $configuration)
+    public function __construct(ConfigurationInterface $configuration, array $guzzleOptions = [])
     {
         $this->configuration = $configuration;
-        $this->guzzle = new GuzzleClient();
+
+        $this->guzzleOptions = array_merge($this->guzzleOptions, $guzzleOptions);
+        $this->guzzle = new GuzzleClient($this->getGuzzleOptions());
     }
 
     /**
      * @return ConfigurationInterface
      */
-    protected function credentials(): ConfigurationInterface {
+    protected function configuration(): ConfigurationInterface {
         return $this->configuration;
     }
 
@@ -44,4 +55,20 @@ abstract class PromisePayClient implements PromisePayInterface
     protected function guzzle(): GuzzleClient {
         return $this->guzzle;
     }
+
+    private function getGuzzleOptions(): array {
+        if (empty($this->guzzleOptions['base_uri'])) {
+            $this->guzzleOptions['base_uri'] = sprintf('https://%s/', $this->configuration()->getHostname());
+        }
+
+        if (empty($this->guzzleOptions['auth'])) {
+            $this->guzzleOptions['auth'] = [
+                'username' => $this->configuration()->getLogin(),
+                'password' => $this->configuration()->getPassword()
+            ];
+        }
+
+        return $this->guzzleOptions;
+    }
+
 }

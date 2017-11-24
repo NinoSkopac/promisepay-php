@@ -7,9 +7,12 @@
  */
 declare(strict_types=1);
 namespace PromisePay\Test\Addresses;
-use PHPUnit\Framework\TestCase;
+use PromisePay\Addresses\AddressesClient;
+use PromisePay\Test\PromisePayTestCase;
 
-class AddressesTest extends TestCase
+class AddressesTest extends PromisePayTestCase
 {
-
+    public function testGet(): void {
+        $addresses = new AddressesClient($this->getConfiguration());
+    }
 }

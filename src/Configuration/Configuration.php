@@ -7,10 +7,12 @@
  */
 
 declare(strict_types=1);
-namespace PromisePay\Credentials;
+namespace PromisePay\Configuration;
 
 class Configuration implements ConfigurationInterface
 {
+    protected const ENVIRONMENTS = ['prelive', 'live'];
+
     /**
      * @var string
      */
@@ -24,8 +26,25 @@ class Configuration implements ConfigurationInterface
      */
     private $password;
 
+    /**
+     * Configuration constructor.
+     * @param string $environment
+     * @param string $login
+     * @param string $password
+     * @throws ConfigurationException
+     */
     public function __construct(string $environment, string $login, string $password)
     {
+        if (!in_array($environment, self::ENVIRONMENTS)) {
+            throw new ConfigurationException(
+                sprintf(
+                    'Environment %s is invalid (valid environments: %s)',
+                    $environment,
+                    implode(', ', self::ENVIRONMENTS)
+                )
+            );
+        }
+
         $this->environment = $environment;
         $this->login = $login;
         $this->password = $password;
@@ -53,5 +72,15 @@ class Configuration implements ConfigurationInterface
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function getHostname(): string
+    {
+        [$preliveEnv,] = self::ENVIRONMENTS;
+
+        if ($this->environment == $preliveEnv)
+            return 'test.api.promisepay.com';
+
+        return 'api.promisepay.com';
     }
 }

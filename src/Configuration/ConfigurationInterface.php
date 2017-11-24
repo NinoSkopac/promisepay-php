@@ -6,7 +6,7 @@
  * Time: 22:48
  */
 declare(strict_types=1);
-namespace PromisePay\Credentials;
+namespace PromisePay\Configuration;
 
 interface ConfigurationInterface
 {
@@ -14,4 +14,5 @@ interface ConfigurationInterface
     public function getEnvironment(): string;
     public function getLogin(): string;
     public function getPassword(): string;
+    public function getHostname(): string;
 }
