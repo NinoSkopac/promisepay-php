@@ -7,6 +7,7 @@
  */
 declare(strict_types=1);
 namespace PromisePay\Configuration;
+
 use PromisePay\PromisePayException;
 
 class ConfigurationException extends PromisePayException
