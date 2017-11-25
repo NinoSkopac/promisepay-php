@@ -65,8 +65,9 @@ abstract class PromisePayClient implements PromisePayInterface
     private function setUpGuzzleOptions(): void {
         $this->guzzleOptions['base_uri'] = sprintf('https://%s/', $this->configuration()->getHostname());
         $this->guzzleOptions['auth'] = [
-            'username' => $this->configuration()->getLogin(),
-            'password' => $this->configuration()->getPassword()
+            $this->configuration()->getLogin(),
+            $this->configuration()->getPassword(),
+            'basic'
         ];
         $this->guzzleOptions['headers']['User-Agent'] = sprintf(
             'PHP_SDK/%s PHP/%s',
