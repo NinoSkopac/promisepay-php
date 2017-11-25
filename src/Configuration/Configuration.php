@@ -76,11 +76,11 @@ class Configuration implements ConfigurationInterface
 
     public function getHostname(): string
     {
-        [$preliveEnv,] = self::ENVIRONMENTS;
+        [$preliveEnv, $liveEnv] = self::ENVIRONMENTS;
 
         if ($this->environment == $preliveEnv)
             return 'test.api.promisepay.com';
-
-        return 'api.promisepay.com';
+        else if ($this->environment == $liveEnv)
+            return 'api.promisepay.com';
     }
 }

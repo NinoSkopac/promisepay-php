@@ -12,6 +12,8 @@ use PromisePay\Configuration\ConfigurationInterface;
 
 abstract class PromisePayClient implements PromisePayInterface
 {
+    public const VERSION = '3.0-dev';
+
     /**
      * @var ConfigurationInterface
      */
@@ -26,7 +28,10 @@ abstract class PromisePayClient implements PromisePayInterface
         'allow_redirects' => false,
         'auth' => null,
         'connect_timeout' => 10,
-        'timeout' => 10
+        'timeout' => 10,
+        'headers' => [
+            'User-Agent' => null
+        ]
     ];
 
     /**
@@ -37,9 +42,9 @@ abstract class PromisePayClient implements PromisePayInterface
     public function __construct(ConfigurationInterface $configuration, array $guzzleOptions = [])
     {
         $this->configuration = $configuration;
-
         $this->guzzleOptions = array_merge($this->guzzleOptions, $guzzleOptions);
-        $this->guzzle = new GuzzleClient($this->getGuzzleOptions());
+        $this->setUpGuzzleOptions();
+        $this->guzzle = new GuzzleClient($this->guzzleOptions);
     }
 
     /**
@@ -56,19 +61,16 @@ abstract class PromisePayClient implements PromisePayInterface
         return $this->guzzle;
     }
 
-    private function getGuzzleOptions(): array {
-        if (empty($this->guzzleOptions['base_uri'])) {
-            $this->guzzleOptions['base_uri'] = sprintf('https://%s/', $this->configuration()->getHostname());
-        }
-
-        if (empty($this->guzzleOptions['auth'])) {
-            $this->guzzleOptions['auth'] = [
-                'username' => $this->configuration()->getLogin(),
-                'password' => $this->configuration()->getPassword()
-            ];
-        }
-
-        return $this->guzzleOptions;
+    private function setUpGuzzleOptions(): void {
+        $this->guzzleOptions['base_uri'] = sprintf('https://%s/', $this->configuration()->getHostname());
+        $this->guzzleOptions['auth'] = [
+            'username' => $this->configuration()->getLogin(),
+            'password' => $this->configuration()->getPassword()
+        ];
+        $this->guzzleOptions['headers']['User-Agent'] = sprintf(
+            'PHP_SDK/%s PHP/%s',
+            self::VERSION,
+            PHP_VERSION
+        );
     }
-
 }

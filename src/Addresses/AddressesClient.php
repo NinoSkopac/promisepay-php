@@ -21,5 +21,6 @@ class AddressesClient extends PromisePayClient
         $response = $this->guzzle()->get('addresses/' . $id);
 
         // @TODO return PromisePayResult
+        var_dump($response);
     }
 }
