@@ -10,13 +10,11 @@ namespace PromisePay\Addresses;
 
 use PromisePay\PromisePayClient;
 
-class AddressesClient extends PromisePayClient
+class AddressesClient extends PromisePayClient implements AddressesInterface
 {
     public function get(string $id) {
         $response = $this->guzzle()->get('addresses/' . $id);
 
-
         // @TODO return PromisePayResult
-        var_dump(get_class($response));
     }
 }

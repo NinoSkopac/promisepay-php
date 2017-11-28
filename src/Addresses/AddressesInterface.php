@@ -10,5 +10,5 @@ namespace PromisePay\Addresses;
 
 interface AddressesInterface
 {
-    public function get();
+    public function get(string $id);
 }
