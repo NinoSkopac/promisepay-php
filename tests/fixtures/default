@@ -1,0 +1,33 @@
+
+-
+    request:
+        method: GET
+        url: 'https://test.api.promisepay.com/addresses/07ed45e5-bb9d-459f-bb7b-a02ecb38f443'
+        headers:
+            Host: test.api.promisepay.com
+            Accept-Encoding: null
+            User-Agent: 'PHP_SDK/3.0-dev PHP/7.1.11'
+            Authorization: 'Basic aWRzaWRvcm92QGdtYWlsLmNvbTpkODk3ZjgxMmU4NDg1NzI4ZTFkZTdkOGFlMDkyYjc1YQ=='
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Thu, 30 Nov 2017 20:27:54 GMT'
+            Content-Type: 'application/json; charset=utf-8'
+            Content-Length: '229'
+            Connection: keep-alive
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            ETag: 'W/"3704b820d9391221e9270e510fce718d"'
+            Server: 'nginx/1.12.1 + Phusion Passenger 4.0.60'
+            Status: '200 OK'
+            Vary: Origin
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: SAMEORIGIN
+            X-Powered-By: 'Phusion Passenger 4.0.60'
+            X-Request-Id: 770c9f88-5225-4b7c-aa1e-a47c4e32d09c
+            X-Runtime: '0.164208'
+            X-XSS-Protection: '1; mode=block'
+        body: '{"addresses":{"addressline1":null,"addressline2":null,"postcode":null,"city":null,"state":null,"id":"07ed45e5-bb9d-459f-bb7b-a02ecb38f443","country":"Australia","links":{"self":"/addresses/07ed45e5-bb9d-459f-bb7b-a02ecb38f443"}}}'
