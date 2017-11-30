@@ -8,31 +8,52 @@
 declare(strict_types=1);
 namespace PromisePay;
 
+use PromisePay\Exception\PromisePayExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Traversable;
 
-class Result implements ResultInterface
+final class Result implements ResultInterface
 {
     /** @var ResponseInterface $response */
     protected $response;
     /** @var array $json */
     protected $json;
+    /**
+     * @var null|string
+     */
+    private $rootIndex;
+    /**
+     * @var null|string
+     */
+    private $exceptionName;
 
     /**
      * Result constructor.
      * @param ResponseInterface $response
-     * @throws ResultException
+     * @param string $rootIndex
+     * @param string $exceptionName
+     * @throws PromisePayExceptionInterface
      */
-    public function __construct(ResponseInterface $response)
+    public function __construct(ResponseInterface $response, string $rootIndex, string $exceptionName)
     {
         $this->response = $response;
+        $this->rootIndex = $rootIndex;
+        $this->exceptionName = $exceptionName;
 
         if (!$this->response->getBody()->isReadable() || empty($this->response->getBody()->getSize())) {
             $message = sprintf("Received empty response with %d status code", $this->response->getStatusCode());
-            throw new ResultException($message, $this->response->getStatusCode());
+            throw new $this->exceptionName($message, $this->response->getStatusCode());
+        }
+
+        if ($this->response->getStatusCode() >= 400) {
+            throw new $this->exceptionName($this->response);
         }
 
         $this->json = json_decode($this->response->getBody()->getContents(), true);
+
+        if ($rootIndex !== null) {
+            $this->json = $this->json[$rootIndex];
+        }
     }
 
     /**
@@ -75,7 +96,7 @@ class Result implements ResultInterface
      */
     public function offsetGet($offset)
     {
-        return empty($this->json[$offset]);
+        return isset($this->json[$offset]) ? $this->json[$offset] : null;
     }
 
     /**

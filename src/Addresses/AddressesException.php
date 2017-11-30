@@ -7,7 +7,7 @@
  */
 declare(strict_types=1);
 namespace PromisePay\Addresses;
-use PromisePay\PromisePayException;
+use PromisePay\Exception\PromisePayException;
 
 class AddressesException extends PromisePayException
 {

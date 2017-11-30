@@ -32,7 +32,8 @@ abstract class PromisePayClient implements PromisePayInterface
         'timeout' => 10,
         'headers' => [
             'User-Agent' => null
-        ]
+        ],
+        'http_errors' => false // so we can use our own exceptions, instead of Guzzle's
     ];
 
     /**

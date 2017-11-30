@@ -12,7 +12,7 @@ use Psr\Http\Message\ResponseInterface;
 
 interface ResultInterface extends \ArrayAccess, \IteratorAggregate, \Countable
 {
-    public function __construct(ResponseInterface $response);
+    public function __construct(ResponseInterface $response, string $rootIndex, string $exceptionName);
 
     /**
      * Provides debug information about the result object
