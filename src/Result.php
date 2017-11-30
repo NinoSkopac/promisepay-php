@@ -8,10 +8,33 @@
 declare(strict_types=1);
 namespace PromisePay;
 
+use Psr\Http\Message\ResponseInterface;
 use Traversable;
 
 class Result implements ResultInterface
 {
+    /** @var ResponseInterface $response */
+    protected $response;
+    /** @var array $json */
+    protected $json;
+
+    /**
+     * Result constructor.
+     * @param ResponseInterface $response
+     * @throws ResultException
+     */
+    public function __construct(ResponseInterface $response)
+    {
+        $this->response = $response;
+
+        if (!$this->response->getBody()->isReadable() || empty($this->response->getBody()->getSize())) {
+            $message = sprintf("Received empty response with %d status code", $this->response->getStatusCode());
+            throw new ResultException($message, $this->response->getStatusCode());
+        }
+
+        $this->json = json_decode($this->response->getBody()->getContents(), true);
+    }
+
     /**
      * Retrieve an external iterator
      * @link http://php.net/manual/en/iteratoraggregate.getiterator.php
@@ -21,7 +44,7 @@ class Result implements ResultInterface
      */
     public function getIterator()
     {
-        // TODO: Implement getIterator() method
+        return new \ArrayIterator($this->json);
     }
 
     /**
@@ -38,7 +61,7 @@ class Result implements ResultInterface
      */
     public function offsetExists($offset)
     {
-        // TODO: Implement offsetExists() method.
+        return isset($this->json[$offset]);
     }
 
     /**
@@ -52,7 +75,7 @@ class Result implements ResultInterface
      */
     public function offsetGet($offset)
     {
-        // TODO: Implement offsetGet() method.
+        return empty($this->json[$offset]);
     }
 
     /**
@@ -69,7 +92,7 @@ class Result implements ResultInterface
      */
     public function offsetSet($offset, $value)
     {
-        // TODO: Implement offsetSet() method.
+        $this->json[$offset] = $value;
     }
 
     /**
@@ -83,7 +106,7 @@ class Result implements ResultInterface
      */
     public function offsetUnset($offset)
     {
-        // TODO: Implement offsetUnset() method.
+        unset($this->json[$offset]);
     }
 
     /**
@@ -93,7 +116,7 @@ class Result implements ResultInterface
      */
     public function __toString()
     {
-        // TODO: Implement __toString() method.
+        return json_encode($this->json, JSON_PRETTY_PRINT);
     }
 
     /**
@@ -103,7 +126,7 @@ class Result implements ResultInterface
      */
     public function toArray()
     {
-        // TODO: Implement toArray() method.
+        return $this->json;
     }
 
     /**
@@ -115,7 +138,7 @@ class Result implements ResultInterface
      */
     public function hasKey($name)
     {
-        // TODO: Implement hasKey() method.
+        return isset($this->json[$name]);
     }
 
     /**
@@ -127,7 +150,7 @@ class Result implements ResultInterface
      */
     public function get($key)
     {
-        // TODO: Implement get() method.
+        return $this->json[$key] ?? null;
     }
 
     /**
@@ -141,6 +164,6 @@ class Result implements ResultInterface
      */
     public function count()
     {
-        // TODO: Implement count() method.
+        return count($this->json);
     }
 }

@@ -8,8 +8,12 @@
 declare(strict_types=1);
 namespace PromisePay;
 
+use Psr\Http\Message\ResponseInterface;
+
 interface ResultInterface extends \ArrayAccess, \IteratorAggregate, \Countable
 {
+    public function __construct(ResponseInterface $response);
+
     /**
      * Provides debug information about the result object
      *
