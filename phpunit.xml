@@ -8,4 +8,7 @@
         <ini name="display_errors" value="On" />
         <ini name="display_startup_errors" value="On" />
     </php>
+    <listeners>
+        <listener class="VCR\PHPUnit\TestListener\VCRTestListener" file="vendor/php-vcr/phpunit-testlistener-vcr/src/VCRTestListener.php" />
+    </listeners>
 </phpunit>

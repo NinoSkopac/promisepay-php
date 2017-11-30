@@ -26,6 +26,4 @@ class AddressesClient extends PromisePayClient implements AddressesInterface
 
         return new Result($response, self::Root_Index['get'], AddressesException::class);
     }
-
-
 }
