@@ -7,4 +7,9 @@ php:
 matrix:
   allow_failures:
     - php: nightly
-script: "phpunit tests"
+
+before_script:
+ - composer install --no-interaction --prefer-source
+
+script:
+- phpunit tests
