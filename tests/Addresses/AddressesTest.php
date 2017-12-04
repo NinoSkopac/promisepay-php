@@ -22,6 +22,6 @@ class AddressesTest extends PromisePayTestCase
         $addresses = new AddressesClient($this->getConfiguration());
         $addressDetails = $addresses->get(self::ADDRESS_ID);
 
-        $this->assertEquals(self::ADDRESS_ID, $addressDetails->toArray()['id']);
+        $this->assertEquals(self::ADDRESS_ID, $addressDetails['id']);
     }
 }

@@ -13,7 +13,7 @@ use function GuzzleHttp\Psr7\stream_for;
 class Result200Test extends ResultAbstract
 {
     public function setUp(): void {
-        $json = <<<'JSON'
+        $json = <<<'RESPONSE'
 {
   "addresses": {
     "addressline1": "100 Main Street",
@@ -28,7 +28,7 @@ class Result200Test extends ResultAbstract
     }
   }
 }
-JSON;
+RESPONSE;
         $this->setUpResult(stream_for($json), 200);
     }
 

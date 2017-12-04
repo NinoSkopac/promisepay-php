@@ -8,7 +8,13 @@
 declare(strict_types=1);
 namespace PromisePay\Addresses;
 
+use PromisePay\Result;
+
 interface AddressesInterface
 {
-    public function get(string $id);
+    /**
+     * @param string $id
+     * @return null|Result
+     */
+    public function get(string $id): ?Result;
 }

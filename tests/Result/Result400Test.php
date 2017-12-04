@@ -16,9 +16,9 @@ class Result400Test extends ResultAbstract
     private $json;
 
     public function setUp(): void {
-        $this->json = <<<'JSON'
+        $this->json = <<<'RESPONSE'
 {"errors":{"id":["invalid format"]}}
-JSON;
+RESPONSE;
     }
 
     public function testExceptionThrown(): void {
