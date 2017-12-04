@@ -13,6 +13,7 @@ use PromisePay\Result;
 
 class AddressesClient extends PromisePayClient implements AddressesInterface
 {
+    protected const Exception = AddressesException::class;
     protected const Root_Index = [
         'get' => 'addresses'
     ];
@@ -24,6 +25,6 @@ class AddressesClient extends PromisePayClient implements AddressesInterface
     public function get(string $id): ?Result {
         $response = $this->guzzle()->get('addresses/' . $id);
 
-        return new Result($response, self::Root_Index['get'], AddressesException::class);
+        return new Result($response, self::Root_Index[__FUNCTION__], self::Exception);
     }
 }
