@@ -14,12 +14,12 @@ use PromisePay\Users\UsersClient;
 class UsersTest extends PromisePayTestCase
 {
     /**
-     * @vcr debug
+     * @vcr default
      */
     public function testList(): void {
         $users = new UsersClient($this->getConfiguration());
         $usersList = $users->list();
 
-        var_dump($usersList->toArray());
+        // @TODO assertions
     }
 }
