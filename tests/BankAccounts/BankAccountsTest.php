@@ -14,7 +14,7 @@ use PromisePay\Test\PromisePayTestCase;
 class BankAccountsTest extends PromisePayTestCase
 {
     protected const BANK_ACCOUNT_CREATE_DETAILS = [
-        'user_id' => '5715d632-edb7-46cb-9615-f2488d81e39a',
+        'user_id' => '5830def0-ffe8-11e5-86aa-5e5517507c66',
         'bank_name' => 'Bank of Australia',
         'account_name' => 'Samuel Seller',
         'routing_number' => '123123',

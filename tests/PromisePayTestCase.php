@@ -14,7 +14,7 @@ use PromisePay\Configuration\Configuration;
 abstract class PromisePayTestCase extends TestCase
 {
     private const CONFIGURATION = [
-        'prelive', 'idsidorov@gmail.com', 'd897f812e8485728e1de7d8ae092b75a'
+        'prelive', 'walkthrough@promisepay.com', 'OGQ4Nzg3OTc4MmE2ZTJjZDFmZDViZjU4NGZmMDEzZjc='
     ];
     public function getConfiguration(): Configuration {
         return new Configuration(...self::CONFIGURATION);

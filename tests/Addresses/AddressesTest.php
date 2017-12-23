@@ -13,7 +13,7 @@ use PromisePay\Test\PromisePayTestCase;
 
 class AddressesTest extends PromisePayTestCase
 {
-    protected const ADDRESS_ID = '07ed45e5-bb9d-459f-bb7b-a02ecb38f443';
+    protected const ADDRESS_ID = 'fe602dcf-4175-4f88-b5be-3beb04092dcd';
 
     /**
      * @vcr default
