@@ -19,7 +19,8 @@ class BankAccountsClient extends PromisePayClient implements BankAccountsInterfa
         'create' => 'bank_accounts',
         'get' => 'bank_accounts',
         'redact' => 'bank_account',
-        'getUser' => 'users'
+        'getUser' => 'users',
+        'validateRoutingNumber' => 'routing_number'
     ];
 
     public function create(
@@ -74,7 +75,7 @@ class BankAccountsClient extends PromisePayClient implements BankAccountsInterfa
      */
     public function getUser(string $bankAccountId): ?Result
     {
-        $requestPath = sprintf('/bank_accounts/%s/users', $bankAccountId);
+        $requestPath = sprintf('bank_accounts/%s/users', $bankAccountId);
         $response = $this->guzzle()->get($requestPath);
 
         return new Result($response, self::Root_Index[__FUNCTION__], self::Exception);
@@ -86,6 +87,10 @@ class BankAccountsClient extends PromisePayClient implements BankAccountsInterfa
      */
     public function validateRoutingNumber(string $bankAccountRoutingNumber): ?Result
     {
-        // TODO: Implement validateRoutingNumber() method.
+        $response = $this->guzzle()->get('tools/routing_number', [
+            RequestOptions::JSON => ['routing_number' => $bankAccountRoutingNumber]
+        ]);
+
+        return new Result($response, self::Root_Index[__FUNCTION__], self::Exception);
     }
 }

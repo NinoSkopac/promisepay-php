@@ -456,3 +456,103 @@
             X-Runtime: '0.240579'
             X-XSS-Protection: '1; mode=block'
         body: '{"users":{"created_at":"2016-04-12T08:13:10.665Z","updated_at":"2017-03-14T12:02:50.526Z","full_name":"Samuel Seller","email":"samuel.seller@assemblypayments.com","mobile":"+61491570156","phone":null,"logo_url":null,"color_1":null,"color_2":null,"first_name":"Samuel","last_name":"Seller","id":"5830def0-ffe8-11e5-86aa-5e5517507c66","custom_descriptor":"Sam Garden Jobs","location":"AUS","verification_state":"pending_check","held_state":false,"roles":["customer"],"dob":"encrypted","government_number":"encrypted","drivers_license":null,"flags":{},"related":{"addresses":"fe602dcf-4175-4f88-b5be-3beb04092dcd","companies":"7b85aa9c-fc54-4449-afef-f52fc2b94cd3","payout_account":"46deb476-c1a6-41eb-8eb7-26a695bbe5bc"},"links":{"self":"/bank_accounts/46deb476-c1a6-41eb-8eb7-26a695bbe5bc/users","items":"/users/5830def0-ffe8-11e5-86aa-5e5517507c66/items","card_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c66/card_accounts","paypal_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c66/paypal_accounts","bank_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c66/bank_accounts","wallet_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c66/wallet_accounts"}}}'
+-
+    request:
+        method: GET
+        url: 'https://test.api.promisepay.com/tools/routing_number?routing_number=46deb476-c1a6-41eb-8eb7-26a695bbe5bc'
+        headers:
+            Host: test.api.promisepay.com
+            Accept-Encoding: null
+            User-Agent: 'PHP_SDK/3.0-dev PHP/7.1.11'
+            Authorization: 'Basic d2Fsa3Rocm91Z2hAcHJvbWlzZXBheS5jb206T0dRNE56ZzNPVGM0TW1FMlpUSmpaREZtWkRWaVpqVTROR1ptTURFelpqYz0='
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '404'
+            message: 'Not Found'
+        headers:
+            Date: 'Tue, 02 Jan 2018 16:52:54 GMT'
+            Content-Type: 'application/json; charset=utf-8'
+            Transfer-Encoding: chunked
+            Connection: keep-alive
+            Cache-Control: no-cache
+            Server: 'nginx/1.12.1 + Phusion Passenger 4.0.60'
+            Status: '404 Not Found'
+            Vary: Origin
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: SAMEORIGIN
+            X-Powered-By: 'Phusion Passenger 4.0.60'
+            X-Request-Id: 0019b131-e5cb-4360-80de-261ace411f7c
+            X-Runtime: '0.136029'
+            X-XSS-Protection: '1; mode=block'
+        body: 'null'
+-
+    request:
+        method: GET
+        url: 'https://test.api.promisepay.com/tools/routing_number'
+        headers:
+            Host: test.api.promisepay.com
+            Expect: null
+            Accept-Encoding: null
+            User-Agent: 'PHP_SDK/3.0-dev PHP/7.1.11'
+            Content-Type: application/json
+            Authorization: 'Basic d2Fsa3Rocm91Z2hAcHJvbWlzZXBheS5jb206T0dRNE56ZzNPVGM0TW1FMlpUSmpaREZtWkRWaVpqVTROR1ptTURFelpqYz0='
+            Accept: null
+        body: '{"routing_number":"46deb476-c1a6-41eb-8eb7-26a695bbe5bc"}'
+    response:
+        status:
+            http_version: '1.1'
+            code: '404'
+            message: 'Not Found'
+        headers:
+            Date: 'Tue, 02 Jan 2018 16:54:35 GMT'
+            Content-Type: 'application/json; charset=utf-8'
+            Content-Length: '4'
+            Connection: keep-alive
+            Cache-Control: no-cache
+            Server: 'nginx/1.12.1 + Phusion Passenger 4.0.60'
+            Status: '404 Not Found'
+            Vary: Origin
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: SAMEORIGIN
+            X-Powered-By: 'Phusion Passenger 4.0.60'
+            X-Request-Id: 14e99c5d-5bd1-4b20-b93c-5960d7963c22
+            X-Runtime: '0.105005'
+            X-XSS-Protection: '1; mode=block'
+        body: 'null'
+-
+    request:
+        method: GET
+        url: 'https://test.api.promisepay.com/tools/routing_number'
+        headers:
+            Host: test.api.promisepay.com
+            Expect: null
+            Accept-Encoding: null
+            User-Agent: 'PHP_SDK/3.0-dev PHP/7.1.11'
+            Content-Type: application/json
+            Authorization: 'Basic d2Fsa3Rocm91Z2hAcHJvbWlzZXBheS5jb206T0dRNE56ZzNPVGM0TW1FMlpUSmpaREZtWkRWaVpqVTROR1ptTURFelpqYz0='
+            Accept: null
+        body: '{"routing_number":"122235821"}'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Tue, 02 Jan 2018 16:58:03 GMT'
+            Content-Type: 'application/json; charset=utf-8'
+            Content-Length: '241'
+            Connection: keep-alive
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            ETag: 'W/"faea47bb620de3fe0e46492f9bcaa2e7"'
+            Server: 'nginx/1.12.1 + Phusion Passenger 4.0.60'
+            Status: '200 OK'
+            Vary: Origin
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: SAMEORIGIN
+            X-Powered-By: 'Phusion Passenger 4.0.60'
+            X-Request-Id: f69f7f17-bd1e-40e4-acd9-6b8f883a642f
+            X-Runtime: '0.112298'
+            X-XSS-Protection: '1; mode=block'
+        body: '{"routing_number":{"routing_number":"122235821","customer_name":"US BANK NA","address":"EP-MN-WN1A","city":"ST. PAUL","state_code":"MN","zip":"55107","zip_extension":"1419","phone_area_code":"800","phone_prefix":"937","phone_suffix":"6310"}}'

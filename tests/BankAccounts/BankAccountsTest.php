@@ -16,7 +16,7 @@ class BankAccountsTest extends PromisePayTestCase
 {
     use BankAccountsExpectedResponses, ResultHelper;
 
-    protected const BANK_ACCOUNT_CREATE_DETAILS = [
+    private const BANK_ACCOUNT_CREATE_DETAILS = [
         'user_id' => '5830def0-ffe8-11e5-86aa-5e5517507c66',
         'bank_name' => 'Bank of Australia',
         'account_name' => 'Samuel Seller',
@@ -26,7 +26,8 @@ class BankAccountsTest extends PromisePayTestCase
         'holder_type' => 'personal',
         'country' => 'AUS'
     ];
-    protected const BANK_ACCOUNT_ID = '46deb476-c1a6-41eb-8eb7-26a695bbe5bc';
+    private const BANK_ACCOUNT_ID = '46deb476-c1a6-41eb-8eb7-26a695bbe5bc';
+    private const ROUTING_NUMBER = '122235821';
 
     /**
      * @vcr default
@@ -82,5 +83,15 @@ class BankAccountsTest extends PromisePayTestCase
         unset($user['related']['companies']); // new field, hasn't been reflected on reference yet
 
         $this->assertEquals($expected, $user);
+    }
+
+    /**
+     * @vcr default
+     */
+    public function testValidateRoutingNumber(): void {
+        $bankAccounts = new BankAccountsClient($this->getConfiguration());
+        $validation = $bankAccounts->validateRoutingNumber(self::ROUTING_NUMBER)->toArray();
+
+        $this->assertEquals($this->getExpectedValidateRoutingNumberResponse(), $validation);
     }
 }
