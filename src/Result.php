@@ -63,7 +63,7 @@ final class Result implements ResultInterface
      * <b>Traversable</b>
      * @since 5.0.0
      */
-    public function getIterator()
+    public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->json);
     }
@@ -80,7 +80,7 @@ final class Result implements ResultInterface
      * The return value will be casted to boolean if non-boolean was returned.
      * @since 5.0.0
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->json[$offset]);
     }
@@ -111,7 +111,7 @@ final class Result implements ResultInterface
      * @return void
      * @since 5.0.0
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->json[$offset] = $value;
     }
@@ -125,7 +125,7 @@ final class Result implements ResultInterface
      * @return void
      * @since 5.0.0
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->json[$offset]);
     }
@@ -135,7 +135,7 @@ final class Result implements ResultInterface
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return json_encode($this->json, JSON_PRETTY_PRINT);
     }
@@ -145,9 +145,9 @@ final class Result implements ResultInterface
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        return $this->json;
+        return is_array($this->json) ? $this->json : [$this->json];
     }
 
     /**
@@ -157,7 +157,7 @@ final class Result implements ResultInterface
      *
      * @return bool
      */
-    public function hasKey($name)
+    public function hasKey($name): bool
     {
         return isset($this->json[$name]);
     }
@@ -183,7 +183,7 @@ final class Result implements ResultInterface
      * The return value is cast to an integer.
      * @since 5.1.0
      */
-    public function count()
+    public function count(): int
     {
         return count($this->json);
     }

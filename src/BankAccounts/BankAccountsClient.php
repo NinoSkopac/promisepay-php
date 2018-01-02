@@ -17,7 +17,9 @@ class BankAccountsClient extends PromisePayClient implements BankAccountsInterfa
     protected const Exception = BankAccountsException::class;
     protected const Root_Index = [
         'create' => 'bank_accounts',
-        'get' => 'bank_accounts'
+        'get' => 'bank_accounts',
+        'redact' => 'bank_account',
+        'getUser' => 'users'
     ];
 
     public function create(
@@ -61,7 +63,9 @@ class BankAccountsClient extends PromisePayClient implements BankAccountsInterfa
      */
     public function redact(string $bankAccountId): ?Result
     {
-        // TODO: Implement redact() method.
+        $response = $this->guzzle()->delete('bank_accounts/' . $bankAccountId);
+
+        return new Result($response, self::Root_Index[__FUNCTION__], self::Exception);
     }
 
     /**
@@ -70,7 +74,10 @@ class BankAccountsClient extends PromisePayClient implements BankAccountsInterfa
      */
     public function getUser(string $bankAccountId): ?Result
     {
-        // TODO: Implement getUser() method.
+        $requestPath = sprintf('/bank_accounts/%s/users', $bankAccountId);
+        $response = $this->guzzle()->get($requestPath);
+
+        return new Result($response, self::Root_Index[__FUNCTION__], self::Exception);
     }
 
     /**

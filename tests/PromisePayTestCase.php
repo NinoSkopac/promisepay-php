@@ -22,16 +22,4 @@ abstract class PromisePayTestCase extends TestCase
     protected function getConfigurationDetails(): array {
         return self::CONFIGURATION;
     }
-
-    /**
-     * @param array $keys
-     * @param array[] $arrays
-     */
-    protected function discardKeysFromArrays(array $keys, array &...$arrays): void {
-        foreach ($arrays as &$array) {
-            foreach ($keys as $key) {
-                unset($array[$key]);
-            }
-        }
-    }
 }

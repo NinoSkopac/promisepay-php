@@ -330,3 +330,129 @@
             X-Runtime: '0.100959'
             X-XSS-Protection: '1; mode=block'
         body: '{"meta":{"limit":0,"offset":0,"total":28},"links":{"self":"/users"}}'
+-
+    request:
+        method: DELETE
+        url: 'https://test.api.promisepay.com/bank_accounts/foobar'
+        headers:
+            Host: test.api.promisepay.com
+            Accept-Encoding: null
+            User-Agent: 'PHP_SDK/3.0-dev PHP/7.1.11'
+            Authorization: 'Basic d2Fsa3Rocm91Z2hAcHJvbWlzZXBheS5jb206T0dRNE56ZzNPVGM0TW1FMlpUSmpaREZtWkRWaVpqVTROR1ptTURFelpqYz0='
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '422'
+            message: 'Unprocessable Entity'
+        headers:
+            Date: 'Tue, 02 Jan 2018 15:57:16 GMT'
+            Content-Type: 'application/json; charset=utf-8'
+            Content-Length: '36'
+            Connection: keep-alive
+            Cache-Control: no-cache
+            Server: 'nginx/1.12.1 + Phusion Passenger 4.0.60'
+            Status: '422 Unprocessable Entity'
+            Vary: Origin
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: SAMEORIGIN
+            X-Powered-By: 'Phusion Passenger 4.0.60'
+            X-Request-Id: c5209da1-ec30-4681-bb1f-6014763f1bb7
+            X-Runtime: '0.095435'
+            X-XSS-Protection: '1; mode=block'
+        body: '{"errors":{"id":["invalid format"]}}'
+-
+    request:
+        method: DELETE
+        url: 'https://test.api.promisepay.com/bank_accounts/46deb412-c145-41eb-8eb7-26a695bbe5bc'
+        headers:
+            Host: test.api.promisepay.com
+            Accept-Encoding: null
+            User-Agent: 'PHP_SDK/3.0-dev PHP/7.1.11'
+            Authorization: 'Basic d2Fsa3Rocm91Z2hAcHJvbWlzZXBheS5jb206T0dRNE56ZzNPVGM0TW1FMlpUSmpaREZtWkRWaVpqVTROR1ptTURFelpqYz0='
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '401'
+            message: Unauthorized
+        headers:
+            Date: 'Tue, 02 Jan 2018 16:00:38 GMT'
+            Content-Type: 'application/json; charset=utf-8'
+            Content-Length: '55'
+            Connection: keep-alive
+            Cache-Control: no-cache
+            Server: 'nginx/1.12.1 + Phusion Passenger 4.0.60'
+            Status: '401 Unauthorized'
+            Vary: Origin
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: SAMEORIGIN
+            X-Powered-By: 'Phusion Passenger 4.0.60'
+            X-Request-Id: 826d689a-964a-48cf-96e0-96fd67644c0a
+            X-Runtime: '0.085524'
+            X-XSS-Protection: '1; mode=block'
+        body: '{"errors":{"not_authorized":["to access that record"]}}'
+-
+    request:
+        method: DELETE
+        url: 'https://test.api.promisepay.com/bank_accounts/46deb476-c1a6-41eb-8eb7-26a695bbe5bc'
+        headers:
+            Host: test.api.promisepay.com
+            Accept-Encoding: null
+            User-Agent: 'PHP_SDK/3.0-dev PHP/7.1.11'
+            Authorization: 'Basic d2Fsa3Rocm91Z2hAcHJvbWlzZXBheS5jb206T0dRNE56ZzNPVGM0TW1FMlpUSmpaREZtWkRWaVpqVTROR1ptTURFelpqYz0='
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Tue, 02 Jan 2018 16:04:16 GMT'
+            Content-Type: 'application/json; charset=utf-8'
+            Content-Length: '40'
+            Connection: keep-alive
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            ETag: 'W/"652727d4dd734c741f93f8884be7f597"'
+            Server: 'nginx/1.12.1 + Phusion Passenger 4.0.60'
+            Status: '200 OK'
+            Vary: Origin
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: SAMEORIGIN
+            X-Powered-By: 'Phusion Passenger 4.0.60'
+            X-Request-Id: 67cf7192-a0a2-4ee7-a08d-39b4ee2e21f0
+            X-Runtime: '0.091384'
+            X-XSS-Protection: '1; mode=block'
+        body: '{"bank_account":"Successfully redacted"}'
+-
+    request:
+        method: GET
+        url: 'https://test.api.promisepay.com/bank_accounts/46deb476-c1a6-41eb-8eb7-26a695bbe5bc/users'
+        headers:
+            Host: test.api.promisepay.com
+            Accept-Encoding: null
+            User-Agent: 'PHP_SDK/3.0-dev PHP/7.1.11'
+            Authorization: 'Basic d2Fsa3Rocm91Z2hAcHJvbWlzZXBheS5jb206T0dRNE56ZzNPVGM0TW1FMlpUSmpaREZtWkRWaVpqVTROR1ptTURFelpqYz0='
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Tue, 02 Jan 2018 16:20:05 GMT'
+            Content-Type: 'application/json; charset=utf-8'
+            Content-Length: '1169'
+            Connection: keep-alive
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            ETag: 'W/"9f8f84fe68d0314524ec11db97e691a5"'
+            Server: 'nginx/1.12.1 + Phusion Passenger 4.0.60'
+            Status: '200 OK'
+            Vary: Origin
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: SAMEORIGIN
+            X-Powered-By: 'Phusion Passenger 4.0.60'
+            X-Request-Id: 68e90d7e-1f26-462d-85c6-75c154d89942
+            X-Runtime: '0.240579'
+            X-XSS-Protection: '1; mode=block'
+        body: '{"users":{"created_at":"2016-04-12T08:13:10.665Z","updated_at":"2017-03-14T12:02:50.526Z","full_name":"Samuel Seller","email":"samuel.seller@assemblypayments.com","mobile":"+61491570156","phone":null,"logo_url":null,"color_1":null,"color_2":null,"first_name":"Samuel","last_name":"Seller","id":"5830def0-ffe8-11e5-86aa-5e5517507c66","custom_descriptor":"Sam Garden Jobs","location":"AUS","verification_state":"pending_check","held_state":false,"roles":["customer"],"dob":"encrypted","government_number":"encrypted","drivers_license":null,"flags":{},"related":{"addresses":"fe602dcf-4175-4f88-b5be-3beb04092dcd","companies":"7b85aa9c-fc54-4449-afef-f52fc2b94cd3","payout_account":"46deb476-c1a6-41eb-8eb7-26a695bbe5bc"},"links":{"self":"/bank_accounts/46deb476-c1a6-41eb-8eb7-26a695bbe5bc/users","items":"/users/5830def0-ffe8-11e5-86aa-5e5517507c66/items","card_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c66/card_accounts","paypal_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c66/paypal_accounts","bank_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c66/bank_accounts","wallet_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c66/wallet_accounts"}}}'

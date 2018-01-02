@@ -41,4 +41,50 @@ JSON;
 
         return json_decode($response, true)['bank_accounts'];
     }
+
+    protected function getExpectedShowBankUserResponse(): array {
+        $response = <<<'JSON'
+{
+  "users": {
+    "created_at": "2016-04-12T08:13:10.665Z",
+    "updated_at": "2016-04-12T08:13:10.665Z",
+    "full_name": "Samuel Seller",
+    "email": "samuel.seller@assemblypayments.com",
+    "mobile": "+61491570156",
+    "phone": null,
+    "logo_url": null,
+    "color_1": null,
+    "color_2": null,
+    "first_name": "Samuel",
+    "last_name": "Seller",
+    "id": "5830def0-ffe8-11e5-86aa-5e5517507c66",
+    "custom_descriptor": "Sam Garden Jobs",
+    "location": "AUS",
+    "verification_state": "pending",
+    "held_state": false,
+    "roles": [
+      "customer"
+    ],
+    "dob": "encrypted",
+    "government_number": "encrypted",
+    "drivers_license": null,
+    "flags": {},
+    "related": {
+      "addresses": "fe602dcf-4175-4f88-b5be-3beb04092dcd",
+      "payout_account": "46deb476-c1a6-41eb-8eb7-26a695bbe5bc"
+    },
+    "links": {
+      "self": "/bank_accounts/5830def0-ffe8-11e5-86aa-5e5517507c66/users",
+      "items": "/users/5830def0-ffe8-11e5-86aa-5e5517507c66/items",
+      "card_accounts": "/users/5830def0-ffe8-11e5-86aa-5e5517507c66/card_accounts",
+      "paypal_accounts": "/users/5830def0-ffe8-11e5-86aa-5e5517507c66/paypal_accounts",
+      "bank_accounts": "/users/5830def0-ffe8-11e5-86aa-5e5517507c66/bank_accounts",
+      "wallet_accounts": "/users/5830def0-ffe8-11e5-86aa-5e5517507c66/wallet_accounts"
+    }
+  }
+}
+JSON;
+
+        return json_decode($response, true)['users'];
+    }
 }
