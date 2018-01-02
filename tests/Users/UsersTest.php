@@ -31,4 +31,17 @@ class UsersTest extends PromisePayTestCase
             }
         }
     }
+
+    /**
+     * @vcr default
+     */
+    public function testListWithSearch(): void {
+        $users = new UsersClient($this->getConfiguration());
+        $samuelUsers = $users->list(self::LIST_COUNT, 0, 'Samuel')->toArray();
+
+        $this->assertNotEmpty($samuelUsers);
+
+        foreach ($samuelUsers as $user)
+            $this->assertContains('Samuel', $user['full_name']);
+    }
 }
