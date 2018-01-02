@@ -13,13 +13,22 @@ use PromisePay\Users\UsersClient;
 
 class UsersTest extends PromisePayTestCase
 {
+    private const LIST_COUNT = 10;
+    private const EXPECTED_USER_PROPERTIES = ['id', 'full_name', 'first_name', 'last_name', 'email', 'mobile'];
+
     /**
      * @vcr default
      */
     public function testList(): void {
         $users = new UsersClient($this->getConfiguration());
-        $usersList = $users->list();
+        $usersList = $users->list(self::LIST_COUNT)->toArray();
 
-        // @TODO assertions
+        $this->assertCount(self::LIST_COUNT, $usersList);
+
+        foreach($usersList as $user) {
+            foreach (self::EXPECTED_USER_PROPERTIES as $property) {
+                $this->assertArrayHasKey($property, $user);
+            }
+        }
     }
 }

@@ -132,3 +132,102 @@
             X-Runtime: '0.196053'
             X-XSS-Protection: '1; mode=block'
         body: '{"bank_accounts":{"id":"46deb476-c1a6-41eb-8eb7-26a695bbe5bc","active":false,"created_at":"2016-04-12T09:20:38.540Z","updated_at":"2017-04-19T23:39:31.594Z","verification_status":"not_verified","currency":"AUD","bank":{"bank_name":"Bank of Australia","country":"AUS","account_name":"Samuel Seller","routing_number":"XXXXX3","account_number":"XXX234","holder_type":"personal","account_type":"checking","direct_debit_authority_status":"approved"},"links":{"self":"/bank_accounts/46deb476-c1a6-41eb-8eb7-26a695bbe5bc","users":"/bank_accounts/46deb476-c1a6-41eb-8eb7-26a695bbe5bc/users","direct_debit_authorities":"/bank_accounts/46deb476-c1a6-41eb-8eb7-26a695bbe5bc/direct_debit_authorities"}}}'
+-
+    request:
+        method: GET
+        url: 'https://test.api.promisepay.com/users?limit=2&offset=0'
+        headers:
+            Host: test.api.promisepay.com
+            Accept-Encoding: null
+            User-Agent: 'PHP_SDK/3.0-dev PHP/7.1.11'
+            Authorization: 'Basic d2Fsa3Rocm91Z2hAcHJvbWlzZXBheS5jb206T0dRNE56ZzNPVGM0TW1FMlpUSmpaREZtWkRWaVpqVTROR1ptTURFelpqYz0='
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Tue, 02 Jan 2018 14:47:21 GMT'
+            Content-Type: 'application/json; charset=utf-8'
+            Content-Length: '1251'
+            Connection: keep-alive
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            ETag: 'W/"9db744038259b1869d2aaecd0bfd7ff0"'
+            Location: /users
+            Server: 'nginx/1.12.1 + Phusion Passenger 4.0.60'
+            Status: '200 OK'
+            Vary: Origin
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: SAMEORIGIN
+            X-Powered-By: 'Phusion Passenger 4.0.60'
+            X-Request-Id: bb2f537e-03f8-4b5c-b3e9-f54e21d593a7
+            X-Runtime: '0.090306'
+            X-XSS-Protection: '1; mode=block'
+        body: '{"users":[{"id":"193b2191-8d85-482b-9811-8919f7e20590","full_name":"Bella Buyer","first_name":"Bella","last_name":"Buyer","created_at":"2017-11-17T06:08:08.299Z","updated_at":"2017-11-17T06:08:08.299Z","email":"sean.finucane2@mav3rik.com","mobile":null,"phone":null,"location":"N/A","links":{"self":"/users/193b2191-8d85-482b-9811-8919f7e20590","items":"/users/193b2191-8d85-482b-9811-8919f7e20590/items","card_accounts":"/users/193b2191-8d85-482b-9811-8919f7e20590/card_accounts","paypal_accounts":"/users/193b2191-8d85-482b-9811-8919f7e20590/paypal_accounts","bank_accounts":"/users/193b2191-8d85-482b-9811-8919f7e20590/bank_accounts","wallet_accounts":"/users/193b2191-8d85-482b-9811-8919f7e20590/wallet_accounts"}},{"id":"123","full_name":"Test User","first_name":"Test User","last_name":null,"created_at":"2017-10-23T12:39:01.819Z","updated_at":"2017-10-23T12:39:01.819Z","email":"test@test.com","mobile":null,"phone":null,"location":"N/A","links":{"self":"/users/123","items":"/users/123/items","card_accounts":"/users/123/card_accounts","paypal_accounts":"/users/123/paypal_accounts","bank_accounts":"/users/123/bank_accounts","wallet_accounts":"/users/123/wallet_accounts"}}],"meta":{"limit":2,"offset":0,"total":28},"links":{"self":"/users"}}'
+-
+    request:
+        method: GET
+        url: 'https://test.api.promisepay.com/users?limit=20&offset=0&search=Samuel'
+        headers:
+            Host: test.api.promisepay.com
+            Accept-Encoding: null
+            User-Agent: 'PHP_SDK/3.0-dev PHP/7.1.11'
+            Authorization: 'Basic d2Fsa3Rocm91Z2hAcHJvbWlzZXBheS5jb206T0dRNE56ZzNPVGM0TW1FMlpUSmpaREZtWkRWaVpqVTROR1ptTURFelpqYz0='
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Tue, 02 Jan 2018 14:48:17 GMT'
+            Content-Type: 'application/json; charset=utf-8'
+            Content-Length: '1507'
+            Connection: keep-alive
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            ETag: 'W/"88d976cfaa06619e542b7acd2af249d3"'
+            Location: /users
+            Server: 'nginx/1.12.1 + Phusion Passenger 4.0.60'
+            Status: '200 OK'
+            Vary: Origin
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: SAMEORIGIN
+            X-Powered-By: 'Phusion Passenger 4.0.60'
+            X-Request-Id: 83aaf8db-45f1-4c8f-93c7-7d045d163013
+            X-Runtime: '1.368281'
+            X-XSS-Protection: '1; mode=block'
+        body: '{"users":[{"id":"bca42ae92511f85e854add32dbf542b8","full_name":"Samuel Seller","first_name":"Samuel","last_name":"Seller","created_at":"2016-10-04T04:25:38.221Z","updated_at":"2016-10-04T04:25:38.221Z","email":"samuel.seller.123@example.com","mobile":"+61491570986","phone":null,"location":"N/A","links":{"self":"/users/bca42ae92511f85e854add32dbf542b8","items":"/users/bca42ae92511f85e854add32dbf542b8/items","card_accounts":"/users/bca42ae92511f85e854add32dbf542b8/card_accounts","paypal_accounts":"/users/bca42ae92511f85e854add32dbf542b8/paypal_accounts","bank_accounts":"/users/bca42ae92511f85e854add32dbf542b8/bank_accounts","wallet_accounts":"/users/bca42ae92511f85e854add32dbf542b8/wallet_accounts"}},{"id":"5830def0-ffe8-11e5-86aa-5e5517507c66","full_name":"Samuel Seller","first_name":"Samuel","last_name":"Seller","created_at":"2016-04-12T08:13:10.665Z","updated_at":"2017-03-14T12:02:50.526Z","email":"samuel.seller@assemblypayments.com","mobile":"+61491570156","phone":null,"location":"N/A","links":{"self":"/users/5830def0-ffe8-11e5-86aa-5e5517507c66","items":"/users/5830def0-ffe8-11e5-86aa-5e5517507c66/items","card_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c66/card_accounts","paypal_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c66/paypal_accounts","bank_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c66/bank_accounts","wallet_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c66/wallet_accounts"}}],"meta":{"limit":20,"offset":0,"total":2},"links":{"self":"/users"}}'
+-
+    request:
+        method: GET
+        url: 'https://test.api.promisepay.com/users?limit=10&offset=0'
+        headers:
+            Host: test.api.promisepay.com
+            Accept-Encoding: null
+            User-Agent: 'PHP_SDK/3.0-dev PHP/7.1.11'
+            Authorization: 'Basic d2Fsa3Rocm91Z2hAcHJvbWlzZXBheS5jb206T0dRNE56ZzNPVGM0TW1FMlpUSmpaREZtWkRWaVpqVTROR1ptTURFelpqYz0='
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Tue, 02 Jan 2018 14:50:21 GMT'
+            Content-Type: 'application/json; charset=utf-8'
+            Content-Length: '6893'
+            Connection: keep-alive
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            ETag: 'W/"711b697c2d34ebd0e883ac077f79bfe1"'
+            Location: /users
+            Server: 'nginx/1.12.1 + Phusion Passenger 4.0.60'
+            Status: '200 OK'
+            Vary: Origin
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: SAMEORIGIN
+            X-Powered-By: 'Phusion Passenger 4.0.60'
+            X-Request-Id: a5cb18f7-1400-4c02-96f7-b6f55e316e2b
+            X-Runtime: '0.113549'
+            X-XSS-Protection: '1; mode=block'
+        body: '{"users":[{"id":"193b2191-8d85-482b-9811-8919f7e20590","full_name":"Bella Buyer","first_name":"Bella","last_name":"Buyer","created_at":"2017-11-17T06:08:08.299Z","updated_at":"2017-11-17T06:08:08.299Z","email":"sean.finucane2@mav3rik.com","mobile":null,"phone":null,"location":"N/A","links":{"self":"/users/193b2191-8d85-482b-9811-8919f7e20590","items":"/users/193b2191-8d85-482b-9811-8919f7e20590/items","card_accounts":"/users/193b2191-8d85-482b-9811-8919f7e20590/card_accounts","paypal_accounts":"/users/193b2191-8d85-482b-9811-8919f7e20590/paypal_accounts","bank_accounts":"/users/193b2191-8d85-482b-9811-8919f7e20590/bank_accounts","wallet_accounts":"/users/193b2191-8d85-482b-9811-8919f7e20590/wallet_accounts"}},{"id":"123","full_name":"Test User","first_name":"Test User","last_name":null,"created_at":"2017-10-23T12:39:01.819Z","updated_at":"2017-10-23T12:39:01.819Z","email":"test@test.com","mobile":null,"phone":null,"location":"N/A","links":{"self":"/users/123","items":"/users/123/items","card_accounts":"/users/123/card_accounts","paypal_accounts":"/users/123/paypal_accounts","bank_accounts":"/users/123/bank_accounts","wallet_accounts":"/users/123/wallet_accounts"}},{"id":"5830def0-ffe8-11e5-86aa-5e5517507c22","full_name":"Sandeep Seller","first_name":"Sandeep","last_name":"Seller","created_at":"2017-04-26T05:57:27.094Z","updated_at":"2017-04-26T05:57:27.094Z","email":"sandeep.seller@seller.example.com","mobile":"+61491570156","phone":null,"location":"N/A","links":{"self":"/users/5830def0-ffe8-11e5-86aa-5e5517507c22","items":"/users/5830def0-ffe8-11e5-86aa-5e5517507c22/items","card_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c22/card_accounts","paypal_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c22/paypal_accounts","bank_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c22/bank_accounts","wallet_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c22/wallet_accounts"}},{"id":"064d6800-fff3-11e5-86aa-5e5517507c11","full_name":"Mark Buyer","first_name":"Mark","last_name":"Buyer","created_at":"2017-04-26T05:56:47.636Z","updated_at":"2017-04-26T05:56:47.636Z","email":"mark.buyer@buyer.example.com","mobile":"+61491570157","phone":null,"location":"N/A","links":{"self":"/users/064d6800-fff3-11e5-86aa-5e5517507c11","items":"/users/064d6800-fff3-11e5-86aa-5e5517507c11/items","card_accounts":"/users/064d6800-fff3-11e5-86aa-5e5517507c11/card_accounts","paypal_accounts":"/users/064d6800-fff3-11e5-86aa-5e5517507c11/paypal_accounts","bank_accounts":"/users/064d6800-fff3-11e5-86aa-5e5517507c11/bank_accounts","wallet_accounts":"/users/064d6800-fff3-11e5-86aa-5e5517507c11/wallet_accounts"}},{"id":"5830def0-ffe8-11e5-86aa-5e5517507c99","full_name":"Sandeep Seller","first_name":"Sandeep","last_name":"Seller","created_at":"2017-04-26T04:22:34.072Z","updated_at":"2017-04-26T04:22:34.072Z","email":"sandeep.seller@example.com","mobile":"+61491570156","phone":null,"location":"N/A","links":{"self":"/users/5830def0-ffe8-11e5-86aa-5e5517507c99","items":"/users/5830def0-ffe8-11e5-86aa-5e5517507c99/items","card_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c99/card_accounts","paypal_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c99/paypal_accounts","bank_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c99/bank_accounts","wallet_accounts":"/users/5830def0-ffe8-11e5-86aa-5e5517507c99/wallet_accounts"}},{"id":"064d6800-fff3-11e5-86aa-5e5517507c77","full_name":"Mark Buyer","first_name":"Mark","last_name":"Buyer","created_at":"2017-04-26T04:17:21.895Z","updated_at":"2017-04-26T04:17:21.895Z","email":"mark.buyer@example.com","mobile":"+61491570157","phone":null,"location":"N/A","links":{"self":"/users/064d6800-fff3-11e5-86aa-5e5517507c77","items":"/users/064d6800-fff3-11e5-86aa-5e5517507c77/items","card_accounts":"/users/064d6800-fff3-11e5-86aa-5e5517507c77/card_accounts","paypal_accounts":"/users/064d6800-fff3-11e5-86aa-5e5517507c77/paypal_accounts","bank_accounts":"/users/064d6800-fff3-11e5-86aa-5e5517507c77/bank_accounts","wallet_accounts":"/users/064d6800-fff3-11e5-86aa-5e5517507c77/wallet_accounts"}},{"id":"test-seller-20170421-135012","full_name":"Seller Name 20170421-135012","first_name":"Seller Name 20170421-135012","last_name":null,"created_at":"2017-04-21T03:50:20.555Z","updated_at":"2017-04-21T03:50:20.555Z","email":"seller-email-20170421-135012@gmail.com","mobile":null,"phone":null,"location":"N/A","links":{"self":"/users/test-seller-20170421-135012","items":"/users/test-seller-20170421-135012/items","card_accounts":"/users/test-seller-20170421-135012/card_accounts","paypal_accounts":"/users/test-seller-20170421-135012/paypal_accounts","bank_accounts":"/users/test-seller-20170421-135012/bank_accounts","wallet_accounts":"/users/test-seller-20170421-135012/wallet_accounts"}},{"id":"test-buyer-20170421-135012","full_name":"Buyer Name 20170421-135012","first_name":"Buyer Name 20170421-135012","last_name":null,"created_at":"2017-04-21T03:50:17.801Z","updated_at":"2017-04-21T03:50:17.801Z","email":"buyer-email-20170421-135012@gmail.com","mobile":null,"phone":null,"location":"N/A","links":{"self":"/users/test-buyer-20170421-135012","items":"/users/test-buyer-20170421-135012/items","card_accounts":"/users/test-buyer-20170421-135012/card_accounts","paypal_accounts":"/users/test-buyer-20170421-135012/paypal_accounts","bank_accounts":"/users/test-buyer-20170421-135012/bank_accounts","wallet_accounts":"/users/test-buyer-20170421-135012/wallet_accounts"}},{"id":"test-seller-20170421-134607","full_name":"Seller Name 20170421-134607","first_name":"Seller Name 20170421-134607","last_name":null,"created_at":"2017-04-21T03:46:14.002Z","updated_at":"2017-04-21T03:46:14.002Z","email":"seller-email-20170421-134607@gmail.com","mobile":null,"phone":null,"location":"N/A","links":{"self":"/users/test-seller-20170421-134607","items":"/users/test-seller-20170421-134607/items","card_accounts":"/users/test-seller-20170421-134607/card_accounts","paypal_accounts":"/users/test-seller-20170421-134607/paypal_accounts","bank_accounts":"/users/test-seller-20170421-134607/bank_accounts","wallet_accounts":"/users/test-seller-20170421-134607/wallet_accounts"}},{"id":"test-buyer-20170421-134607","full_name":"Buyer Name 20170421-134607","first_name":"Buyer Name 20170421-134607","last_name":null,"created_at":"2017-04-21T03:46:12.472Z","updated_at":"2017-04-21T03:46:12.472Z","email":"buyer-email-20170421-134607@gmail.com","mobile":null,"phone":null,"location":"N/A","links":{"self":"/users/test-buyer-20170421-134607","items":"/users/test-buyer-20170421-134607/items","card_accounts":"/users/test-buyer-20170421-134607/card_accounts","paypal_accounts":"/users/test-buyer-20170421-134607/paypal_accounts","bank_accounts":"/users/test-buyer-20170421-134607/bank_accounts","wallet_accounts":"/users/test-buyer-20170421-134607/wallet_accounts"}}],"meta":{"limit":10,"offset":0,"total":28},"links":{"self":"/users"}}'
