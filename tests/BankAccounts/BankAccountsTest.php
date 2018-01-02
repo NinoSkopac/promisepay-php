@@ -25,21 +25,36 @@ class BankAccountsTest extends PromisePayTestCase
         'holder_type' => 'personal',
         'country' => 'AUS'
     ];
+    protected const BANK_ACCOUNT_GET_ID = '46deb476-c1a6-41eb-8eb7-26a695bbe5bc';
 
     /**
      * @vcr default
      */
     public function testCreate(): void {
         $bankAccounts = new BankAccountsClient($this->getConfiguration());
-        $bankAccountsCreate = $bankAccounts->create(...array_values(self::BANK_ACCOUNT_CREATE_DETAILS));
-        $response = $bankAccountsCreate->toArray();
+        $bankAccountsCreate = $bankAccounts->create(...array_values(self::BANK_ACCOUNT_CREATE_DETAILS))->toArray();
 
         // don't check these keys because:
         // user_id is not present in response.bank
         // routing and account numbers are obfuscated
-        $dontCheckTheseKeys = ['user_id', 'routing_number', 'account_number'];
+        $discardKeys = ['user_id', 'routing_number', 'account_number'];
+        $details = self::BANK_ACCOUNT_CREATE_DETAILS;
+        $this->discardKeysFromArrays($discardKeys, $details, $bankAccountsCreate);
 
-        $expectedArraySubset = array_diff_key(self::BANK_ACCOUNT_CREATE_DETAILS, array_flip($dontCheckTheseKeys));
-        $this->assertArraySubset(['bank' => $expectedArraySubset], $response);
+        $this->assertArraySubset(['bank' => $details], $bankAccountsCreate);
+    }
+
+    /**
+     * @vcr default
+     */
+    public function testGet(): void {
+        $bankAccounts = new BankAccountsClient($this->getConfiguration());
+        $bankAccountsGet = $bankAccounts->get(self::BANK_ACCOUNT_GET_ID)->toArray();
+
+        $expectedResponse = $this->getExpectedGetResponse();
+        $discardKeys = ['active', 'created_at', 'updated_at'];
+        $this->discardKeysFromArrays($discardKeys, $bankAccountsGet, $expectedResponse);
+
+        $this->assertEquals($bankAccountsGet, $expectedResponse);
     }
 }

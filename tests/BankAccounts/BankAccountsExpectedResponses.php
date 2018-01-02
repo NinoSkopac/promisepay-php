@@ -10,7 +10,7 @@ namespace PromisePay\Test\BankAccounts;
 
 trait BankAccountsExpectedResponses
 {
-    protected function getExpectedShowResponse(): array {
+    protected function getExpectedGetResponse(): array {
         $response = <<<'JSON'
 {
   "bank_accounts": {

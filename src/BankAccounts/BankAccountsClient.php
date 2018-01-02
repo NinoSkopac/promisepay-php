@@ -16,7 +16,8 @@ class BankAccountsClient extends PromisePayClient implements BankAccountsInterfa
 {
     protected const Exception = BankAccountsException::class;
     protected const Root_Index = [
-        'create' => 'bank_accounts'
+        'create' => 'bank_accounts',
+        'get' => 'bank_accounts'
     ];
 
     public function create(
@@ -49,7 +50,9 @@ class BankAccountsClient extends PromisePayClient implements BankAccountsInterfa
      */
     public function get(string $bankAccountId): ?Result
     {
-        // TODO: Implement get() method.
+        $response = $this->guzzle()->get('bank_accounts/' . $bankAccountId);
+
+        return new Result($response, self::Root_Index[__FUNCTION__], self::Exception);
     }
 
     /**
