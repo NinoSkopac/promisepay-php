@@ -19,6 +19,16 @@ class UsersTest extends PromisePayTestCase
     /**
      * @vcr default
      */
+    public function testGetUserCount(): void {
+        $users = new UsersClient($this->getConfiguration());
+        $count = $users->getUserCount();
+
+        $this->assertGreaterThan(0, $count);
+    }
+
+    /**
+     * @vcr default
+     */
     public function testList(): void {
         $users = new UsersClient($this->getConfiguration());
         $usersList = $users->list(self::LIST_COUNT)->toArray();

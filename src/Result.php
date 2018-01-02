@@ -30,11 +30,11 @@ final class Result implements ResultInterface
     /**
      * Result constructor.
      * @param ResponseInterface $response
-     * @param string $rootIndex
+     * @param string|null $rootIndex
      * @param string $exceptionName
      * @throws PromisePayExceptionInterface
      */
-    public function __construct(ResponseInterface $response, string $rootIndex, string $exceptionName)
+    public function __construct(ResponseInterface $response, ?string $rootIndex, string $exceptionName)
     {
         $this->response = $response;
         $this->rootIndex = $rootIndex;
