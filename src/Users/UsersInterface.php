@@ -12,6 +12,8 @@ use PromisePay\Result;
 
 interface UsersInterface
 {
+    public function getUserCount(): int;
+
     /**
      * @param int $limit
      * @param int $offset
